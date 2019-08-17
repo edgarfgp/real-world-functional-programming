@@ -1,63 +1,64 @@
 ﻿namespace real_world_functional_programming
 
-[<Measure>] type Euro
+module Domain =
+    [<Measure>] type Euro
 
-type City =
-    | London
-    | Madrid
-    | NY
-    | Paris
+    type Country =
+        | Spain
+        | UK
+        | France
 
-type State =
-    | Active
-    | Inactive
+    type City =
+        | London
+        | Madrid
+        | Paris
 
-type Currency = decimal<Euro>
+    type State =
+        | Active
+        | Inactive
 
-type Address =
-    { Street: string
-      Town: string
-      City: City }
+    type Currency = decimal<Euro>
 
-type Customer =
-    { Name: string
-      Surname: string
-      Active: State
-      Address: Address
-      Total: Currency
-      Discount: Currency }
+    type Address =
+        { Street: string
+          Town: string
+          City: City }
+
+    type Customer =
+        { Name: string
+          Surname: string
+          Active: State
+          Country: Country
+          Address: Address
+          Total: Currency
+          Discount: Currency }
 
 module CustomerLogic =
+    open Domain
     let customers = [
-        { Name = "Edgar"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Islington"; City = London } }
+        { Name = "Edgar"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>;
+            Country = UK; Address = { Street = "Kendal House"; Town = "Islington"; City = London } }
 
-        { Name = "Oscar"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Getafe"; City = Madrid } }
+        { Name = "Oscar"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>;
+          Country = Spain; Address = { Street = "Kendal House"; Town = "Getafe"; City = Madrid } }
 
-        { Name = "Manuel"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "District 1"; City = Paris } }
+        { Name = "Manuel"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>;
+          Country = France; Address = { Street = "Kendal House"; Town = "District 1"; City = Paris } }
 
-        { Name = "Madelin"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Angel"; City = London } }
+        { Name = "Madelin"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>;
+          Country = UK; Address = { Street = "Kendal House"; Town = "Angel"; City = London } }
 
-        { Name = "Alba"; Surname = "Gonzalez"; Active = Active; Total = 25.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Angel"; City = Madrid } }
+        { Name = "Alba"; Surname = "Gonzalez"; Active = Active; Total = 25.0M<Euro>; Discount = 0.0M<Euro>;
+          Country = Spain; Address = { Street = "Kendal House"; Town = "Angel"; City = Madrid } }
 
-        { Name = "Carlos"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Angel"; City = NY } }
+        { Name = "Eleni"; Surname = "Gonzalez"; Active = Inactive; Total = 25.0M<Euro>; Discount = 0.0M<Euro>;
+          Country = UK; Address = { Street = "Kendal House"; Town = "Angel"; City = London } }
 
-        { Name = "Eleni"; Surname = "Gonzalez"; Active = Inactive; Total = 25.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Angel"; City = London } }
-
-        { Name = "Pepe"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Angel"; City = NY } }
-
-        { Name = "Juan"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Angel"; City = Paris } }
+        { Name = "Juan"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>;
+         Country = France; Address = { Street = "Kendal House"; Town = "Angel"; City = Paris } }
 
         { Name = "Juan"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
-          Address = { Street = "Kendal House"; Town = "Angel"; City = Paris } }
+          Country = France; Address = { Street = "Kendal House"; Town = "Angel"; City = Paris } }
      ]
 
     let (|ActiveCustomer|InactiveCustomer|) customer =
@@ -86,6 +87,16 @@ module CustomerLogic =
             { customer with Discount = discountIncrease }
         else
             customer
+
+    let getCustomerBillTotalFromSpain state customer =
+        if customer.Country = Spain then
+            state + customer.Total
+        else
+            state
+
+    let initState = 0.0M<Euro>
+
+    let totalBillFromSPain = List.fold getCustomerBillTotalFromSpain initState customers
 
     let customerResult =
         customers
