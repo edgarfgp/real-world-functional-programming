@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <RootNamespace>real_world_functional_programming</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Customer.fs" />
+        <None Include="Sandbox.fsx" />
+        <Compile Include="BadToGood.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FSharp.Data" Version="3.1.1" />
+    </ItemGroup>
+
+</Project>
