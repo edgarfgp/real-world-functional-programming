@@ -1,5 +1,7 @@
 ﻿namespace real_world_functional_programming
 
+[<Measure>] type Euro
+
 type City =
     | London
     | Madrid
@@ -10,10 +12,7 @@ type State =
     | Active
     | Inactive
 
-type Currency =
-    | Dollar of decimal
-    | Euro of decimal
-    | Pound of decimal
+type Currency = decimal<Euro>
 
 type Address =
     { Street: string
@@ -26,38 +25,38 @@ type Customer =
       Active: State
       Address: Address
       Total: Currency
-      Discount: decimal }
+      Discount: Currency }
 
-module Examples =
+module CustomerLogic =
     let customers = [
-        { Name = "Edgar"; Surname = "Gonzalez"; Active = Inactive; Total = Pound 05.0M; Discount = 0.0M
+        { Name = "Edgar"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Islington"; City = London } }
 
-        { Name = "Oscar"; Surname = "Gonzalez"; Active = Active; Total = Euro 05.0M; Discount = 0.0M
+        { Name = "Oscar"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Getafe"; City = Madrid } }
 
-        { Name = "Manuel"; Surname = "Gonzalez"; Active = Inactive; Total = Euro 05.0M; Discount = 0.0M
+        { Name = "Manuel"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "District 1"; City = Paris } }
 
-        { Name = "Madelin"; Surname = "Gonzalez"; Active = Active; Total = Pound 05.0M; Discount = 0.0M
+        { Name = "Madelin"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Angel"; City = London } }
 
-        { Name = "Alba"; Surname = "Gonzalez"; Active = Inactive; Total = Euro 25.0M; Discount = 0.0M
+        { Name = "Alba"; Surname = "Gonzalez"; Active = Active; Total = 25.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Angel"; City = Madrid } }
 
-        { Name = "Carlos"; Surname = "Gonzalez"; Active = Active; Total = Dollar 05.0M; Discount = 0.0M
+        { Name = "Carlos"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Angel"; City = NY } }
 
-        { Name = "Eleni"; Surname = "Gonzalez"; Active = Inactive; Total = Pound 25.0M; Discount = 0.0M
+        { Name = "Eleni"; Surname = "Gonzalez"; Active = Inactive; Total = 25.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Angel"; City = London } }
 
-        { Name = "Pepe"; Surname = "Gonzalez"; Active = Active; Total = Dollar 05.0M; Discount = 0.0M
+        { Name = "Pepe"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Angel"; City = NY } }
 
-        { Name = "Juan"; Surname = "Gonzalez"; Active = Inactive; Total = Euro 05.0M; Discount = 0.0M
+        { Name = "Juan"; Surname = "Gonzalez"; Active = Inactive; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Angel"; City = Paris } }
 
-        { Name = "Juan"; Surname = "Gonzalez"; Active = Active; Total = Euro 05.0M; Discount = 0.0M
+        { Name = "Juan"; Surname = "Gonzalez"; Active = Active; Total = 05.0M<Euro>; Discount = 0.0M<Euro>
           Address = { Street = "Kendal House"; Town = "Angel"; City = Paris } }
      ]
 
@@ -79,22 +78,19 @@ module Examples =
         else false
 
 
-    let getCustomerAddresses =
-        function
-        | (_, _, _, address, _, _) -> address
+    let getCustomerAddresses customer =
+        customer.Address
 
-    let updateDiscountCustomer discountIncrease =
-        function
-        | (name, surname, state, address, total, _) when (total >= 20.0M && total <= 50.0M) ->
-            (name, surname, state, address, total, discountIncrease)
+    let updateDiscountCustomer discountIncrease customer =
+        if customer.Total >= 20.0M<Euro> && customer.Total <= 50.0M<Euro> then
+            { customer with Discount = discountIncrease }
+        else
+            customer
 
-        | (name, surname, state, address, total, discount) ->
-            (name, surname, state, address, total, discount)
-
-    let customerData =
+    let customerResult =
         customers
         |> List.filter getActiveCustomer
         |> List.filter (getCustomerFromLocation Madrid)
-        |> List.filter (getCustomerByTotal (Pound 20.0M))
-//        |> List.map (updateDiscountCustomer 10.0M)
-//        |> List.map getCustomerAddresses
+        |> List.filter (getCustomerByTotal 20.0M<Euro>)
+        |> List.map (updateDiscountCustomer 10.0M<Euro>)
+        |> List.map getCustomerAddresses
