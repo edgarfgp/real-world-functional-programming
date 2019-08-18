@@ -1,60 +1,51 @@
 ﻿namespace real_world_functional_programming
 
 module Domain =
-    [<Measure>] type Euro
 
-    type Country =
-        | Spain
-        | UK
-        | France
-
-    type City =
-        | London
-        | Madrid
-        | Paris
-
-    type Currency = decimal<Euro>
-
-    type Address =
+    type Customer =
+        { Name: string
+          Surname: string
+          FullName: string option
+          Active: bool
+          Address: Address
+          Total: Currency
+          Discount: Currency option }
+    and Address =
         { Street: string
           Town: string
           City: City
           PostalCode: string
           Country: Country }
-
-    type Customer =
-        { Name: string
-          Surname: string
-          Active: bool
-          Address: Address
-          Total: Currency
-          Discount: Currency option }
+    and  [<Measure>] Euro
+    and Currency = decimal<Euro>
+    and Country = | Spain | UK | France
+    and City = | London | Madrid | Paris
 
 module CustomerLogic =
     open Domain
     let customers = [
-        { Name = "Edgar"; Surname = "Gonzalez"; Active = true; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
+        { Name = "Edgar"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
           Address = { Street = "Kendal House"; Town = "Islington"; City = London; Country = UK; PostalCode = "N19DE" } }
 
-        { Name = "Oscar"; Surname = "Gonzalez"; Active = false; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
+        { Name = "Oscar"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
           Address = { Street = "Kendal House"; Town = "Getafe"; City = Madrid; Country = Spain; PostalCode = "N19DE" } }
 
-        { Name = "Manuel"; Surname = "Gonzalez"; Active = true; Total = 05.0M<Euro>; Discount = None;
+        { Name = "Manuel"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 05.0M<Euro>; Discount = None;
           Address = { Street = "Kendal House"; Town = "District 1"; City = Paris; Country = France; PostalCode = "N19DE" } }
 
-        { Name = "Madelin"; Surname = "Gonzalez"; Active = false; Total = 05.0M<Euro>; Discount = None;
+        { Name = "Madelin"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 05.0M<Euro>; Discount = None;
           Address = { Street = "Kendal House"; Town = "Angel"; City = London; Country = UK; PostalCode = "N19DE" } }
 
-        { Name = "Alba"; Surname = "Gonzalez"; Active = true; Total = 25.0M<Euro>; Discount = None;
+        { Name = "Alba"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 25.0M<Euro>; Discount = None;
           Address = { Street = "Kendal House"; Town = "Angel"; City = Madrid; Country = Spain; PostalCode = "N19DE" } }
 
-        { Name = "Eleni"; Surname = "Gonzalez"; Active = false; Total = 25.0M<Euro>; Discount = None;
+        { Name = "Eleni"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 25.0M<Euro>; Discount = None;
           Address = { Street = "Kendal House"; Town = "Angel"; City = London; Country = UK; PostalCode = "N19DE" } }
 
-        { Name = "Juan"; Surname = "Gonzalez"; Active = true; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
+        { Name = "Juan"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
          Address = { Street = "Kendal House"; Town = "Angel"; City = Paris; Country = France; PostalCode = "N19DE" } }
 
-        { Name = "Juan"; Surname = "Gonzalez"; Active = false; Total = 05.0M<Euro>; Discount = None;
+        { Name = "Juan"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 05.0M<Euro>; Discount = None;
           Address = { Street = "Kendal House"; Town = "Angel"; City = Paris; Country = France; PostalCode = "N19DE" } }
      ]
 
@@ -75,7 +66,6 @@ module CustomerLogic =
         if customer.Total > billTotal then true
         else false
 
-
     let getCustomerAddresses customer =
         customer.Address
 
@@ -85,26 +75,26 @@ module CustomerLogic =
         else
             customer
 
-    let getCustomerBillTotalFromSpain state customer =
-        if customer.Address.Country = Spain then
+    let getCustomersBillTotal state customer =
+        if customer.Total > 0.0M<Euro> then
             state + customer.Total
         else
             state
 
-    let initState = 0.0M<Euro>
-
-    let totalBillFromSPain = List.fold getCustomerBillTotalFromSpain initState customers
-
     let getCustomersFullName customer =
-        customer.Name + " " + customer.Surname
+        let formattedName = customer.Name + " " + customer.Surname
+        let fullName = Option.defaultValue formattedName customer.FullName
+        { customer with FullName = Some fullName }
 
-    let customerFullNames =
-        customers
-        |> List.map getCustomersFullName
+    let addDefaultDiscount customer =
+         let discount = Option.defaultValue 0.5M<Euro> customer.Discount
+         { customer with Discount = Some discount }
+
+    let customerState = 0.0M<Euro>
 
     let customerResult =
         customers
         |> List.filter getActiveCustomer
-        |> List.filter (getCustomerFromLocation Madrid)
-        |> List.filter (getCustomerByTotal 20.0M<Euro>)
-        |> List.map (fun c -> Option.defaultValue 0.50M<Euro> c.Discount)
+        |> List.map getCustomersFullName
+        |> List.map addDefaultDiscount
+        |> List.fold getCustomersBillTotal customerState
