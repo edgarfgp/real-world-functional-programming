@@ -2,20 +2,20 @@
 
 module Domain =
 
-    type Customer =
-        { Name: string
-          Surname: string
-          FullName: string option
-          Active: bool
-          Address: Address
-          Total: Currency
-          Discount: Currency option }
-    and Address =
-        { Street: string
-          Town: string
-          City: City
-          PostalCode: string
-          Country: Country }
+    type Customer = {
+        Name: string
+        Surname: string
+        FullName: string option
+        Active: bool
+        Address: Address
+        Total: Currency
+        Discount: Currency option }
+    and Address = {
+        Street: string
+        Town: string
+        City: City
+        PostalCode: string
+        Country: Country }
     and  [<Measure>] Euro
     and Currency = decimal<Euro>
     and Country = | Spain | UK | France
@@ -30,22 +30,22 @@ module CustomerLogic =
         { Name = "Oscar"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
           Address = { Street = "Kendal House"; Town = "Getafe"; City = Madrid; Country = Spain; PostalCode = "N19DE" } }
 
-        { Name = "Manuel"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 05.0M<Euro>; Discount = None;
+        { Name = "Manuel"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
           Address = { Street = "Kendal House"; Town = "District 1"; City = Paris; Country = France; PostalCode = "N19DE" } }
 
-        { Name = "Madelin"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 05.0M<Euro>; Discount = None;
+        { Name = "Madelin"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
           Address = { Street = "Kendal House"; Town = "Angel"; City = London; Country = UK; PostalCode = "N19DE" } }
 
-        { Name = "Alba"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 25.0M<Euro>; Discount = None;
+        { Name = "Alba"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 25.0M<Euro>; Discount = Some 0.0M<Euro>;
           Address = { Street = "Kendal House"; Town = "Angel"; City = Madrid; Country = Spain; PostalCode = "N19DE" } }
 
-        { Name = "Eleni"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 25.0M<Euro>; Discount = None;
+        { Name = "Eleni"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 25.0M<Euro>; Discount = Some 0.0M<Euro>;
           Address = { Street = "Kendal House"; Town = "Angel"; City = London; Country = UK; PostalCode = "N19DE" } }
 
         { Name = "Juan"; Surname = "Gonzalez"; FullName = None; Active = true; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
          Address = { Street = "Kendal House"; Town = "Angel"; City = Paris; Country = France; PostalCode = "N19DE" } }
 
-        { Name = "Juan"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 05.0M<Euro>; Discount = None;
+        { Name = "Juan"; Surname = "Gonzalez"; FullName = None; Active = false; Total = 05.0M<Euro>; Discount = Some 0.0M<Euro>;
           Address = { Street = "Kendal House"; Town = "Angel"; City = Paris; Country = France; PostalCode = "N19DE" } }
      ]
 
@@ -92,11 +92,12 @@ module CustomerLogic =
 
     let showCustomersWithDefaultDiscount customer =
         customer.Discount
+            |> Option.map (fun _ -> customer.FullName.Value.ToUpper())
             |> Option.iter (fun discount -> printfn "FullName: %A\n Discount: %A" customer.FullName discount)
 
     let customersWithDefaultDiscount =
         customers
-        |> List.map addDefaultDiscount
+        |> List.map getCustomersFullName
         |> List.map showCustomersWithDefaultDiscount
 
     let customerState = 0.0M<Euro>
@@ -107,3 +108,5 @@ module CustomerLogic =
         |> List.map getCustomersFullName
         |> List.map addDefaultDiscount
         |> List.fold getCustomersBillTotal customerState
+
+    let SumTwoNumbers a b = a + b
