@@ -90,6 +90,15 @@ module CustomerLogic =
          let discount = Option.defaultValue 0.5M<Euro> customer.Discount
          { customer with Discount = Some discount }
 
+    let showCustomersWithDefaultDiscount customer =
+        customer.Discount
+            |> Option.iter (fun discount -> printfn "FullName: %A\n Discount: %A" customer.FullName discount)
+
+    let customersWithDefaultDiscount =
+        customers
+        |> List.map addDefaultDiscount
+        |> List.map showCustomersWithDefaultDiscount
+
     let customerState = 0.0M<Euro>
 
     let customerResult =
