@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "real-world-functional-programming", "real-world-functional-programming\real-world-functional-programming.fsproj", "{5027FFA3-1E80-415F-A800-D4019CD1336D}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RealFunctionalApp", "RealFunctionalApp\RealFunctionalApp.fsproj", "{5027FFA3-1E80-415F-A800-D4019CD1336D}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "real-world-funtional-programming-tests", "real-world-funtional-programming-tests\real-world-funtional-programming-tests.fsproj", "{60A99B29-C3A1-45AF-8C9A-8FB2283207DF}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RealFunctionalAppTests", "RealFunctionalAppTests\RealFunctionalAppTests.fsproj", "{60A99B29-C3A1-45AF-8C9A-8FB2283207DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,6 +4,8 @@
         <TargetFramework>netcoreapp2.2</TargetFramework>
 
         <IsPackable>false</IsPackable>
+
+        <RootNamespace>real-world-funtional-programming-tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\real-world-functional-programming\real-world-functional-programming.fsproj" />
+      <ProjectReference Include="..\RealFunctionalApp\RealFunctionalApp.fsproj" />
     </ItemGroup>
 
 </Project>
