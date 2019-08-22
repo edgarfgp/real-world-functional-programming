@@ -25,4 +25,3 @@ module Domain =
               Address: Address
               Total: Currency
               Discount: Currency option }
-    

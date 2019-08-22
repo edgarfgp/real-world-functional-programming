@@ -1,15 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
-        <RootNamespace>real_world_functional_programming</RootNamespace>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <Compile Include="Domain.fs" />
-        <Compile Include="Data.fs" />
-        <Compile Include="Implementation.fs" />
-        <None Include="Sandbox.fsx" />
-    </ItemGroup>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>real_world_functional_programming</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Domain.fs" />
+    <Compile Include="Data.fs" />
+    <Compile Include="Implementation.fs" />
+    <None Include="Sandbox.fsx" />
+  </ItemGroup>
+  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

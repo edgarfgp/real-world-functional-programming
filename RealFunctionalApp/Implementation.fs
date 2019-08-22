@@ -52,9 +52,7 @@ module BusinessImplementation =
             |> Option.iter (fun discount -> printfn "FullName: %A\n Discount: %A" customer.FullName discount)
 
     let customersWithDefaultDiscount =
-        customers
-        |> List.map getCustomersFullName
-        |> List.map showCustomersWithDefaultDiscount
+        List.map (getCustomersFullName >> showCustomersWithDefaultDiscount) customers
 
     let customerState = 0.0M<Euro>
 
