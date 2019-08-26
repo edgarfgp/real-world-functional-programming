@@ -1,7 +1,5 @@
 ﻿namespace RealFunctionalApp
 
-#load "Domain.fs"
-#load "Data.fs"
 open RealFunctionalApp.Domain
 open RealFunctionalApp.Data
 
