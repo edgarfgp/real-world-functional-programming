@@ -8,10 +8,10 @@
     <Compile Include="Customer\Domain.fs" />
     <Compile Include="Customer\Data.fs" />
     <Compile Include="Customer\Implementation.fs" />
-    <None Include="Sandbox.fsx" />
     <Compile Include="Poker\Domain.fs" />
     <Compile Include="Poker\Data.fs" />
     <Compile Include="Poker\Implementation.fs" />
+    <None Include="App.fsx" />
   </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
