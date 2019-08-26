@@ -1,4 +1,4 @@
-namespace RealFunctionalApp
+namespace Customer
 
 module Domain =
 

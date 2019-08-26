@@ -1,7 +1,7 @@
 ﻿namespace RealFunctionalApp
 
-open RealFunctionalApp.Domain
-open RealFunctionalApp.Data
+open Customer.Data
+open Customer.Domain
 
 module BusinessImplementation =
 

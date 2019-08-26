@@ -1,6 +1,6 @@
-namespace RealFunctionalApp
+namespace Customer
 
-open RealFunctionalApp.Domain
+open Customer.Domain
 
 module Data =
 
