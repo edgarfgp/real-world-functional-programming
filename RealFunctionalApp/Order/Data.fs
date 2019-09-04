@@ -1,9 +1,8 @@
-namespace Customer
+namespace Order
 
-open Customer.Domain
+open Domain
 
 module Data =
-
   let customers = [
         { Name = "Edgar"
           Surname = "Gonzalez"

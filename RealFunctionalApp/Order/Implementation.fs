@@ -1,9 +1,9 @@
-﻿namespace RealFunctionalApp
+﻿namespace Order
 
-open Customer.Data
-open Customer.Domain
+open Domain
+open Data
 
-module BusinessImplementation =
+module Implementation =
 
     let (|ActiveCustomer|InactiveCustomer|) customer =
         if customer.Active then ActiveCustomer
@@ -55,8 +55,6 @@ module BusinessImplementation =
     let customerState = 0.0M<Euro>
 
     let customerResult =
-        customers
-        |> List.filter getActiveCustomer
-        |> List.map getCustomersFullName
-        |> List.map addDefaultDiscount
+        (List.map (getCustomersFullName >> addDefaultDiscount) (customers
+        |> List.filter getActiveCustomer))
         |> List.fold getCustomersBillTotal customerState

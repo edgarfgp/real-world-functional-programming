@@ -5,13 +5,13 @@
     <RootNamespace>real_world_functional_programming</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Customer\Domain.fs" />
-    <Compile Include="Customer\Data.fs" />
-    <Compile Include="Customer\Implementation.fs" />
+    <Compile Include="Order\Domain.fs" />
+    <Compile Include="Order\Data.fs" />
+    <Compile Include="Order\Implementation.fs" />
     <Compile Include="Poker\Domain.fs" />
     <Compile Include="Poker\Data.fs" />
     <Compile Include="Poker\Implementation.fs" />
-    <None Include="App.fsx" />
+    <Compile Include="App.fs" />
   </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

@@ -1,2 +1,2 @@
-module Poker
+namespace Poker
 

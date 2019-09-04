@@ -1,4 +1,4 @@
-namespace Customer
+namespace Order
 
 module Domain =
 
