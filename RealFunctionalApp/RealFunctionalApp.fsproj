@@ -8,9 +8,9 @@
     <Compile Include="Order\Domain.fs" />
     <Compile Include="Order\Data.fs" />
     <Compile Include="Order\Implementation.fs" />
-    <Compile Include="Poker\Domain.fs" />
-    <Compile Include="Poker\Data.fs" />
-    <Compile Include="Poker\Implementation.fs" />
+    <Compile Include="Casino\Domain.fs" />
+    <Compile Include="Casino\Data.fs" />
+    <Compile Include="Casino\Implementation.fs" />
     <Compile Include="App.fs" />
   </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
