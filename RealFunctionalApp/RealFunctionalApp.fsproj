@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>real_world_functional_programming</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
@@ -13,5 +13,4 @@
     <Compile Include="Casino\Implementation.fs" />
     <Compile Include="App.fs" />
   </ItemGroup>
-  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

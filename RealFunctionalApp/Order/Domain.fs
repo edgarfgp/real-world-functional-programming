@@ -17,10 +17,16 @@ module Domain =
               PostalCode: string
               Country: Country }
 
+        type Gender =
+            | Male
+            | Female
+            | Unspecified
+        
         type Customer =
             { Name: string
               Surname: string
               FullName: string option
+              Gender: Gender
               Active: bool
               Address: Address
               Total: Currency

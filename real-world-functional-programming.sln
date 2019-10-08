@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RealFunctionalApp", "RealFunctionalApp\RealFunctionalApp.fsproj", "{5027FFA3-1E80-415F-A800-D4019CD1336D}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RealFunctionalApp.Tests", "RealFunctionalApp.Tests\RealFunctionalApp.Tests.fsproj", "{80A54CF6-CF4B-4FD2-8DF8-273475BBF878}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{5027FFA3-1E80-415F-A800-D4019CD1336D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5027FFA3-1E80-415F-A800-D4019CD1336D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5027FFA3-1E80-415F-A800-D4019CD1336D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A54CF6-CF4B-4FD2-8DF8-273475BBF878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A54CF6-CF4B-4FD2-8DF8-273475BBF878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A54CF6-CF4B-4FD2-8DF8-273475BBF878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A54CF6-CF4B-4FD2-8DF8-273475BBF878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
