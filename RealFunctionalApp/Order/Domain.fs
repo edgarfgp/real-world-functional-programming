@@ -6,6 +6,10 @@ module Domain =
     [<Measure>] type Euro
     [<Measure>] type GBP
     
+    type Currency =
+        | Euros of decimal<Euro>
+        | BritishPounds of decimal<GBP>
+    
     let poundsPerEuro = 0.899761M<GBP/Euro>
     let eurosPerPound = 1.111406M<Euro/GBP>
     
@@ -36,7 +40,6 @@ module Domain =
         |> round dp
         |> toPounds
     
-        
     type Country = | Spain | UK | France
 
     type City = | London | Madrid | Paris
@@ -53,29 +56,12 @@ module Domain =
         | Female
         | Unspecified
     
-    type Customer<'a> =
+    type Customer =
         { Name: string
           Surname: string
           FullName: string option
           Gender: Gender
           Active: bool
           Address: Address
-          Total: 'a
-          Discount: 'a option }
-        
-    let dave = {
-        Name = "Dave"
-        Surname = "Cook"
-        FullName = Some "Dave Cook"
-        Gender = Male
-        Active = true
-        Address = {
-            Street = ""
-            Town = ""
-            City = London
-            PostalCode = ""
-            Country = UK
-        }
-        Total = 05.0M<GBP>
-        Discount = None
-    }
+          Total: Currency
+          Discount: Currency option }

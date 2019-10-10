@@ -80,8 +80,8 @@ module Implementation =
 //        | [] -> total
 //        | head :: tail -> totalSpendOf (total + head.Total) tail 
         
-    let totalSpend (customers:Customer<decimal<_>> list) =
-        customers
-        |> List.fold (fun total customer -> total + customer.Total) 0.0M//<Euro>
-//        |> totalSpendOf 0.0M<Euro> //removed to avoid stack overflow issues
+//    let totalSpend customers =
+//        customers
+//        |> List.fold (fun total customer -> total + customer.Total) (Euros 00.0M<Euro>)
+////        |> totalSpendOf 0.0M<Euro> //removed to avoid stack overflow issues
         
