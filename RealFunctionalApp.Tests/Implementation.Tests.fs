@@ -17,17 +17,17 @@ let ``Returns count of customers from London`` () =
      |> Implementation.customersCountByCity London 
      |> should equal 3
      
-//[<Fact>]
-//let ``Returns Total number of customers, regardless of City`` () =
-//     Data.customers
-//     |> Implementation.customersCountByCity None
-//     |> should equal 8
-//     
-//[<Fact>]
-//let ``Returns Total number of customers, regardless of Country`` () =
-//     Data.customers
-//     |> Implementation.customersCountByCountry None
-//     |> should equal 8
+[<Fact>]
+let ``Convert Pounds to Euros`` () =
+     05.0M<GBP>
+     |> Order.Domain.poundsToEuros 2
+     |> should equal 5.56M<Euro>
+
+[<Fact>]
+let ``Convert to Pounds`` () =
+     05.0M<Euro>
+     |> Order.Domain.eurosToPounds 2
+     |> should equal 4.50M<GBP>
      
 [<Fact>]
 let ``Return Count of Male Customers`` () =

@@ -1,7 +1,6 @@
 ﻿namespace Order
 
 open Domain
-//open Data
 
 module Implementation =
 
@@ -81,8 +80,8 @@ module Implementation =
 //        | [] -> total
 //        | head :: tail -> totalSpendOf (total + head.Total) tail 
         
-    let totalSpend customers =
+    let totalSpend (customers:Customer<decimal<_>> list) =
         customers
-        |> List.fold (fun total customer -> total + customer.Total) 0.0M<Euro>
+        |> List.fold (fun total customer -> total + customer.Total) 0.0M//<Euro>
 //        |> totalSpendOf 0.0M<Euro> //removed to avoid stack overflow issues
         
