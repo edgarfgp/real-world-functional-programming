@@ -48,8 +48,8 @@ let ``Return Count of Unspecified Customers`` () =
      |> Implementation.customerCountByGender Unspecified
      |> should equal 1
      
-//[<Fact>]
-//let ``Return total spend for all customers`` () =
-//     Data.customers
-//     |> Implementation.totalSpend
-//     |> should equal 80.0M<Euro> 
+[<Fact>]
+let ``Return total spend for all customers`` () =
+     Data.customers
+     |> Implementation.totalSpend
+     |> should equal (BritishPounds 75.4892450M<GBP>)

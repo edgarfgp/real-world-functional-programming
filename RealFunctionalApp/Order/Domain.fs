@@ -1,14 +1,9 @@
 namespace Order
 
-
 module Domain =
 
     [<Measure>] type Euro
     [<Measure>] type GBP
-    
-    type Currency =
-        | Euros of decimal<Euro>
-        | BritishPounds of decimal<GBP>
     
     let poundsPerEuro = 0.899761M<GBP/Euro>
     let eurosPerPound = 1.111406M<Euro/GBP>
@@ -56,12 +51,28 @@ module Domain =
         | Female
         | Unspecified
     
+        //https://stackoverflow.com/questions/13567081/creating-a-list-with-multiple-units-of-measurements-of-floats-in-f
+        //Thank you Tomas Petricek!
+        type Currency =
+        | Euros of decimal<Euro>
+        | BritishPounds of decimal<GBP> 
+        
+            static member (+) (x,y) =
+                match x, y with
+                | (Euros a, Euros b) -> Euros (a + b)
+                | (BritishPounds a, Euros b) -> BritishPounds (a + eurosToPounds 7 b)
+                | (Euros a, BritishPounds b) -> Euros (a + poundsToEuros 7 b)
+                | (BritishPounds a, BritishPounds b) -> BritishPounds (a+b)
+        
+        
     type Customer =
         { Name: string
           Surname: string
-          FullName: string option
           Gender: Gender
           Active: bool
           Address: Address
           Total: Currency
-          Discount: Currency option }
+          Discount: Currency option } with
+        
+        member this.FullName = 
+            this.Name + " " + this.Surname

@@ -8,7 +8,6 @@ module Data =
         {
         Name = ""
         Surname = "Gonzalez"
-        FullName = None
         Active = false
         Gender = Female
         Total =    BritishPounds 05.0M<GBP>
@@ -22,7 +21,6 @@ module Data =
         {
           Name = "Edgar"
           Surname = "Gonzalez"
-          FullName = None
           Active = true
           Gender = Male
           Total =    BritishPounds 05.0M<GBP>
@@ -36,7 +34,6 @@ module Data =
         {
           Name = "Eleni"
           Surname = "Gonzalez"
-          FullName = None
           Active = false
           Gender = Female
           Total =    BritishPounds 25.0M<GBP>
@@ -50,7 +47,6 @@ module Data =
         {
             Name = "Oscar"
             Surname = "Gonzalez"
-            FullName = None
             Active = false
             Gender = Male
             Total =    Euros 05.0M<Euro>
@@ -64,7 +60,6 @@ module Data =
         {
             Name = "Manuel"
             Surname = "Gonzalez"
-            FullName = None
             Active = true
             Gender = Unspecified
             Total =    Euros 05.0M<Euro>
@@ -78,7 +73,6 @@ module Data =
         {
             Name = "Alba"
             Surname = "Gonzalez"
-            FullName = None
             Active = true
             Gender = Female
             Total =    Euros 25.0M<Euro>
@@ -92,7 +86,6 @@ module Data =
         {
             Name = "Juan"
             Surname = "Gonzalez"
-            FullName = None
             Active = true
             Gender = Male
             Total =    Euros 05.0M<Euro>
@@ -106,7 +99,6 @@ module Data =
         {
               Name = "Juan"
               Surname = "Gonzalez"
-              FullName = None
               Active = false
               Gender = Male
               Total =    Euros 05.0M<Euro>

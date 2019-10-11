@@ -80,8 +80,14 @@ module Implementation =
 //        | [] -> total
 //        | head :: tail -> totalSpendOf (total + head.Total) tail 
         
-//    let totalSpend customers =
-//        customers
-//        |> List.fold (fun total customer -> total + customer.Total) (Euros 00.0M<Euro>)
-////        |> totalSpendOf 0.0M<Euro> //removed to avoid stack overflow issues
+    let totalSpend customers =
+        customers
+        |> List.fold (fun total customer -> total + customer.Total) (BritishPounds 00.0M<GBP>)
+//        |> totalSpendOf 0.0M<Euro> //removed to avoid stack overflow issues
+
+//currency does not support the plus operator
+//we could add it to the type?
+
+//however, we probably need to specify totalSpend in a particular currency, converting all other currencies
+//to the chosen currency
         
